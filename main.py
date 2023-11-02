@@ -17,20 +17,25 @@ def stop_timer():
 def update_timer():
     if running:
         current_time = int(time.time() - start_time)
-        timer_label.config(text=f"Elapsed Time: {current_time} seconds")
-    root.after(1000, update_timer)  
+        hours = current_time // 3600    # Calculate the hours
+        minutes = (current_time % 3600) // 60  # Calculate the minutes
+        seconds = current_time % 60   # Calculate the remaining seconds
+        timer_label.config(text=f"Elapsed Time: {hours} hours {minutes} minutes {seconds} seconds", font=("Arial", 24))
+    root.after(1000, update_timer)
+     
 
 root = tk.Tk()
 root.title("Timer")
+root.configure(bg="lightblue")  # Set background color
 
-start_button = tk.Button(root, text="Start Timer", command=start_timer)
-start_button.pack()
+start_button = tk.Button(root, text="Start Timer", command=start_timer, font=("Arial", 14))
+start_button.pack(pady=10)
 
-stop_button = tk.Button(root, text="Stop Timer", command=stop_timer)
-stop_button.pack()
+stop_button = tk.Button(root, text="Stop Timer", command=stop_timer, font=("Arial", 14))
+stop_button.pack(pady=10)
 
-timer_label = tk.Label(root, text="Press 'Start Timer'")
-timer_label.pack()
+timer_label = tk.Label(root, text="Press 'Start Timer'", font=("Arial", 18))
+timer_label.pack(pady=10)
 
 start_time = None
 running = False
