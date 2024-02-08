@@ -38,6 +38,17 @@ def update_timer():
         timer_label.config(text=f"Elapsed Time: {hours} hours {minutes} minutes {seconds} seconds", font=("Arial", 24))
     root.after(1000, update_timer)
 
+def stop_timer():
+    global start_time, running, paused
+    if running or paused:
+        start_time = None
+        running = False
+        paused = False
+        root.title("Timer is stopped")
+        pause_button.config(state=tk.DISABLED)  # Disable the "Pause Timer" button
+        start_button.config(state=tk.NORMAL)   # Enable the "Start Timer" button
+        timer_label.config(text="Press 'Start Timer'")
+        
 root = tk.Tk()
 root.title("Timer")
 root.configure(bg="lightblue")  # Set background color
